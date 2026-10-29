@@ -1,0 +1,7 @@
+USE mysqlragdb0;
+INSERT INTO customers (id,name,email) VALUES (1,'김고객','customer1@example.invalid'),(2,'이고객','customer2@example.invalid'),(3,'박고객','customer3@example.invalid') ON DUPLICATE KEY UPDATE name=VALUES(name);
+INSERT INTO products (id,name,category,price) VALUES (1,'무선 이어폰','전자기기',59000),(2,'블루투스 스피커','전자기기',79000),(3,'보온 텀블러','생활용품',19000),(4,'데스크 조명','생활용품',35000),(5,'요가 매트','운동용품',28000),(6,'휴대용 충전기','전자기기',39000) ON DUPLICATE KEY UPDATE name=VALUES(name),price=VALUES(price);
+INSERT INTO orders (id,customer_id,ordered_at,status) VALUES (1,1,DATE_SUB(NOW(),INTERVAL 12 DAY),'DELIVERED'),(2,1,DATE_SUB(NOW(),INTERVAL 35 DAY),'PAID'),(3,2,DATE_SUB(NOW(),INTERVAL 8 DAY),'DELIVERED'),(4,3,DATE_SUB(NOW(),INTERVAL 120 DAY),'DELIVERED') ON DUPLICATE KEY UPDATE id=id;
+INSERT INTO order_items (id,order_id,product_id,quantity,unit_price) VALUES (1,1,1,1,59000),(2,2,6,1,39000),(3,3,3,2,19000),(4,4,5,1,28000) ON DUPLICATE KEY UPDATE id=id;
+INSERT INTO reviews (id,customer_id,product_id,rating,content,created_at) VALUES (1,1,1,5,'음질과 착용감이 좋아 전자기기를 선호합니다.',DATE_SUB(NOW(),INTERVAL 10 DAY)),(2,1,6,2,'충전 속도가 느려서 이 충전기는 다시 구매하고 싶지 않습니다.',DATE_SUB(NOW(),INTERVAL 5 DAY)),(3,2,3,5,'텀블러 보온력이 좋아 만족합니다.',DATE_SUB(NOW(),INTERVAL 3 DAY)) ON DUPLICATE KEY UPDATE id=id;
+INSERT INTO complaints (id,customer_id,order_id,category,content,status) VALUES (1,1,1,'배송','배송 완료로 표시되었으나 상품을 받지 못했습니다.','OPEN'),(2,1,2,'품질','휴대용 충전기 충전 속도가 안내보다 느립니다.','OPEN'),(3,2,3,'교환','텀블러 뚜껑에 흠집이 있어 교환하고 싶습니다.','IN_PROGRESS') ON DUPLICATE KEY UPDATE id=id;
