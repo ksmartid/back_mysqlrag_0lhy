@@ -4,6 +4,11 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+    inputs:
+      release_tag:
+        description: 
+        required: false
+        type: string
 
 permissions:
   contents: read
