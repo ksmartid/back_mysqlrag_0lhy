@@ -23,7 +23,7 @@ from .auth import User, current_user, roles, mask_name, assert_complaint_scope
 from .rag import chunks, search_documents, search_chunks, index_one, public_hits
 from .routes import router, complaint_assist_core, get_complaint
 
-app=FastAPI(title='hyoung814/back_mysqlrag_0lhy:v14 쇼핑몰 MySQL RAG 고객 응대 API')
+app=FastAPI(title='hyoung814/back_mysqlrag_0lhy:v15 쇼핑몰 MySQL RAG 고객 응대 API')
 
 app.add_middleware(CORSMiddleware,allow_origins=os.getenv('CORS_ORIGINS','http://localhost:5173').split(','),allow_methods=['*'],allow_headers=['*'])
 app.include_router(router)
